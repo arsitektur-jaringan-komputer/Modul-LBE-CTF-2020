@@ -96,14 +96,11 @@ Karena tidak disimpan di database, Reflected XSS lebih susah dipahami daripada S
 #### Contoh :
 Kembali lagi ke perusahaan tadi. Website perusahaan tersebut menyediakan search bar dan kita bisa mencari solusi dari keluhan kita di search bar tersebut. Seorang pelanggan yang juga seorang programmer menggunakan fungsi tersebut. Lalu dia melihat URL dari website tersebut menjadi `support.mega-bank.com/search?query=open+savings+account`.
 
-Lalu ia mencoba mengganti parameter query di URL tersebut menjadi `support.mega-bank.com/search?query=open+check‐
-ing+account` dan hasil dari pencarian tersebut berisi solusi yang berhubungan dengan open checking account.
+Lalu ia mencoba mengganti parameter query di URL tersebut menjadi `support.mega-bank.com/search?query=open+check‐ing+account` dan hasil dari pencarian tersebut berisi solusi yang berhubungan dengan open checking account.
 
-Seperti pelanggan sebelumnya, pelanggan ini mencoba agar input yang ia masukkan ter-bold, maka ia menggunakan URL `support.mega-bank.com/search?query=open+<strong>checking</strong>
-+account` dan yang mengejutkan hasil di halaman tersebut ikut ter-bold.
+Seperti pelanggan sebelumnya, pelanggan ini mencoba agar input yang ia masukkan ter-bold, maka ia menggunakan URL `support.mega-bank.com/search?query=open+<strong>checking</strong>+account` dan yang mengejutkan hasil di halaman tersebut ikut ter-bold.
 
-Sekarang pelanggan tersebut bisa menyisipkan script ke URL tersebut seperti `support.mega-bank.com/search?query=open+<script>alert(test);</
-script>checking+account` dan akan mengeluarkan alert di halaman hasil pencarian.
+Sekarang pelanggan tersebut bisa menyisipkan script ke URL tersebut seperti `support.mega-bank.com/search?query=open+<script>alert(test);</script>checking+account` dan akan mengeluarkan alert di halaman hasil pencarian.
 
 Script tersebut pastinya tidak disimpan di server dan server akan membaca dan mengembalikan script itu ke client. Inilah yang disebut Reflected-XSS. Contoh tersebut membutuhkan URL sehingga hacker mudah untuk membagikannya. Sebagian besar Reflected-XSS tidak mudah didistribusikan dan mungkin memerlukan end-user untuk melakukan tindakan tambahan seperti pasting Javascript ke suatu web form.
 
@@ -118,8 +115,7 @@ Perbedaan XSS ini dengan yang lain adalah serangan ini tidak membutuhkan interak
 #### Contoh :
 Kembali lagi ke perusahaan tadi. Kali ini perusahaan ini menawarkan portal untuk investasi. Halaman `investors.mega-bank.com/listing` memiliki daftar dari berbagai instrumen investasi. Di halaman tersebut ada navigation menu untuk searching dan filtering dari instrumen ini.
 
-Seorang pelanggan yang juga seorang programmer mencari investasi untuk minyak, maka URL berubah menjadi `nvestors.mega-bank.com/listing?
-search=oil`. Lalu dia menfilter untuk negara AS, maka URL nya berubah menjadi `investors.mega-bank.com/listing#usa` dan halaman akan otomatis scroll ke bagian instrumen berbasis di AS.
+Seorang pelanggan yang juga seorang programmer mencari investasi untuk minyak, maka URL berubah menjadi `nvestors.mega-bank.com/listing?search=oil`. Lalu dia menfilter untuk negara AS, maka URL nya berubah menjadi `investors.mega-bank.com/listing#usa` dan halaman akan otomatis scroll ke bagian instrumen berbasis di AS.
 
 Lalu pelanggan tersebut meneliti halaman dari website tersebut dengan inspect element dan menemukan script ini :
 ```javascript
@@ -141,3 +137,39 @@ document.write(nMatches + ' matches found for ' + hash);
 Script ini memiliki arti bahwa halaman tersebut selalu menempelkan string di belakang tanda hash (#) ke DOM. Maka pelanggan tersebut bisa bermain-main dengan menggunakan URL ini `investors.mega-bank.com/listing#<script>alert(document.cookie);</script>` dimana akan menampilkan cookie dari session.
 
 Di contoh ini pelanggan tidak memerlukan interaksi dengan server karena script Javascript yang melakukan searching maupun filtering.
+
+## Cross Site Request Forgery (CSRF)
+
+Cross Site Request Forgery (CSRF) atau yang biasa dikenal sebagai *one click attack* maupun *session riding* merupakan bentuk eksploitasi website yang dieksekusi atas wewenang korban, tanpa dikehendakinya. CSRF menipu website melalui request dari user yang terpercaya.
+
+![csrf](img/csrf.png)
+*Salah satu contoh serangan CSRF*
+
+Salah satu cara menggunakan serangan CSRF adalah dengan memanipulasi payload dari request dengan jenis GET. Karena jenis HTTP request default dari browser merupakan GET, maka GET request adalah cara yang paling mudah untuk menyerang dengan metode CSRF.
+
+#### Contoh
+Kembali ke perusahaan tadi, kali ini seorang pelanggan melakukan transaksi di website perusahaan tersebut. Saat melakukan transaksi, ia melihat URL dari transaksi tersebut yaitu `https://www.mega-bank.com/transfer?to_user=123123&amount=5000`. Karena parameter-parameter transaksi diatur oleh parameter di GET, maka si pelanggan bisa mencari id dari dirinya dan membuat tag image seperti ini :
+
+```html
+<!--Unlike a link, an image performs an HTTP GET request right when it loads
+into the DOM. This means it requires no interaction from the user loading
+the webpage.-->
+<img src="https://www.mega-bank.com/transfer?
+to_user=<hacker's account>&amount=10000" width="0" height="0" border="0">
+```
+
+Dimana ketiga tag tersebut tersebut terdeteksi oleh browser, maka GET request akan terbentuk ke endpoint tersebut.
+
+## SQL Injection
+
+
+
+
+
+
+
+
+## Sumber
+
+- https://www.nginx.com/resources/library/web-application-security/?fbclid=IwAR0MwQPka0mcXgxJsj_VtoumuwJpD5ojC9SbLxpdLN2qDzFSSvV2nt7YBto#download
+- https://mti.binus.ac.id/2018/07/11/cross-site-request-forgery/
