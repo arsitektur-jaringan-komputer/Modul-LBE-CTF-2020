@@ -91,4 +91,20 @@ Reflected XSS beroperasi dengan cara yang mirip dengan Stored XSS, tetapi script
 ![reflected-xss](img/reflected-xss.png)
 *Salah satu contoh Reflected-XSS*
 
-Karena tidak disimpan di database, Reflected XSS lebih susah dipahami daripada Stored XSS.
+Karena tidak disimpan di database, Reflected XSS lebih susah dipahami daripada Stored XSS. Mari kita mulai dari contoh sederhana :
+
+#### Contoh :
+Kembali lagi ke perusahaan tadi. Website perusahaan tersebut menyediakan search bar dan kita bisa mencari solusi dari keluhan kita di search bar tersebut. Seorang pelanggan yang juga seorang programmer menggunakan fungsi tersebut. Lalu dia melihat URL dari website tersebut menjadi `support.mega-bank.com/search?query=open+savings+account`.
+
+Lalu ia mencoba mengganti parameter query di URL tersebut menjadi `support.mega-bank.com/search?query=open+check‐
+ing+account` dan hasil dari pencarian tersebut berisi solusi yang berhubungan dengan open checking account.
+
+Seperti pelanggan sebelumnya, pelanggan ini mencoba agar input yang ia masukkan ter-bold, maka ia menggunakan URL `support.mega-bank.com/search?query=open+<strong>checking</strong>
++account` dan yang mengejutkan hasil di halaman tersebut ikut ter-bold.
+
+Sekarang pelanggan tersebut bisa menyisipkan script ke URL tersebut seperti `support.mega-bank.com/search?query=open+<script>alert(test);</
+script>checking+account` dan akan mengeluarkan alert di halaman hasil pencarian.
+
+Script tersebut pastinya tidak disimpan di server dan server akan membaca dan mengembalikan script itu ke client. Inilah yang disebut Reflected-XSS. Contoh tersebut membutuhkan URL sehingga hacker mudah untuk membagikannya. Sebagian besar Reflected-XSS tidak mudah didistribusikan dan mungkin memerlukan end-user untuk melakukan tindakan tambahan seperti pasting Javascript ke suatu web form.
+
+### DOM-Based XSS
