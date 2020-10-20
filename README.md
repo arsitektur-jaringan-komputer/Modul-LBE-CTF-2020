@@ -108,3 +108,36 @@ script>checking+account` dan akan mengeluarkan alert di halaman hasil pencarian.
 Script tersebut pastinya tidak disimpan di server dan server akan membaca dan mengembalikan script itu ke client. Inilah yang disebut Reflected-XSS. Contoh tersebut membutuhkan URL sehingga hacker mudah untuk membagikannya. Sebagian besar Reflected-XSS tidak mudah didistribusikan dan mungkin memerlukan end-user untuk melakukan tindakan tambahan seperti pasting Javascript ke suatu web form.
 
 ### DOM-Based XSS
+DOM-Based XSS bisa direfleksikan atau disimpan. Serangan ini lebih sulit ditemukan dan dimanfaatkan daripada Stored-XSS maupun Reflected-XSS karena membutuhkan pengetahuan yang mendalam tentang DOM Browser dan Javascript.
+
+![dom-based-xss](img/dom-based-xss.png)
+*Salah satu contoh DOM-Based XSS*
+
+Perbedaan XSS ini dengan yang lain adalah serangan ini tidak membutuhkan interaksi apapun dengan server. Karena hal ini maka dibutuhkan "source" dan "sink" di browser DOM. source adalah DOM objek yang bisa menyimpan text, sedangkan sink adalah DOM API yang bisa mengeksekusi script yang disimpan sebagai text.
+
+#### Contoh :
+Kembali lagi ke perusahaan tadi. Kali ini perusahaan ini menawarkan portal untuk investasi. Halaman `investors.mega-bank.com/listing` memiliki daftar dari berbagai instrumen investasi. Di halaman tersebut ada navigation menu untuk searching dan filtering dari instrumen ini.
+
+Seorang pelanggan yang juga seorang programmer mencari investasi untuk minyak, maka URL berubah menjadi `nvestors.mega-bank.com/listing?
+search=oil`. Lalu dia menfilter untuk negara AS, maka URL nya berubah menjadi `investors.mega-bank.com/listing#usa` dan halaman akan otomatis scroll ke bagian instrumen berbasis di AS.
+
+Lalu pelanggan tersebut meneliti halaman dari website tersebut dengan inspect element dan menemukan script ini :
+```javascript
+/*
+* Grab the hash object #<x> from the URL.
+* Find all matches with the findNumberOfMatches() function,
+* providing the hash value as an input.
+*/
+const hash = document.location.hash;
+const funds = [];
+const nMatches = findNumberOfMatches(funds, hash);
+/*
+* Write the number of matches found, plus append the hash
+* value to the DOM to improve the user experience.
+*/
+document.write(nMatches + ' matches found for ' + hash);
+```
+
+Script ini memiliki arti bahwa halaman tersebut selalu menempelkan string di belakang tanda hash (#) ke DOM. Maka pelanggan tersebut bisa bermain-main dengan menggunakan URL ini `investors.mega-bank.com/listing#<script>alert(document.cookie);</script>` dimana akan menampilkan cookie dari session.
+
+Di contoh ini pelanggan tidak memerlukan interaksi dengan server karena script Javascript yang melakukan searching maupun filtering.
