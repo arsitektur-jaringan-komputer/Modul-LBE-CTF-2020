@@ -162,6 +162,19 @@ Dimana ketiga tag tersebut tersebut terdeteksi oleh browser, maka GET request ak
 
 ## SQL Injection
 
+SQL Injection bekerja dengan memasukkan SQL string ke HTTP payload sehingga sebuah SQL query akan terkesekusi di server.
+
+![sql-injection](img/sql-injection.png)
+*Flow SQL Injection*
+
+Karena penggunaan SQL sebagai database sangatlah umum, maka serangan ini cukup sering terjadi. Serangan SQL Injection yang sukses bisa digunakan untuk membaca data sensitif di database, memodifikasi database, mengeksekusi operasi administratif di database, dan di beberapa kasus memberikan command kepada operating system. 
+
+#### Contoh
+Kembali ke perusahaan tadi. Kali ini memberikan fitur search. Lalu seorang pelanggan memasukkan `1=1` ke dalam fitur search tersebut dan ternyata website tersebut mengeluarkan semua data yang ada di database. Hal ini terjadi karena `1=1` dianggap selalu memiliki nilai true sehingga di database perintah akan dianggap seperti `SELECT * FROM data where data_name = true`.
+
+Sekarang sang pelanggan bisa bermain-main dengan memasukkan input seperti `123abc; DROP TABLE users;` dimana perintah ini akan menghapus tabel users. Atau memanfaatkan untuk keuntungan pelanggan ini sendiri dengan input `123abc; UPDATE users SET credits = 10000 WHERE user = 123abd;`.
+
+## Denial of Service (DoS)
 
 
 
@@ -173,3 +186,4 @@ Dimana ketiga tag tersebut tersebut terdeteksi oleh browser, maka GET request ak
 
 - https://www.nginx.com/resources/library/web-application-security/?fbclid=IwAR0MwQPka0mcXgxJsj_VtoumuwJpD5ojC9SbLxpdLN2qDzFSSvV2nt7YBto#download
 - https://mti.binus.ac.id/2018/07/11/cross-site-request-forgery/
+- https://owasp.org/www-community/attacks/SQL_Injection
