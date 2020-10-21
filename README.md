@@ -176,14 +176,58 @@ Sekarang sang pelanggan bisa bermain-main dengan memasukkan input seperti `123ab
 
 ## Denial of Service (DoS)
 
+Serangan DoS merupakan serangan yang bermaksud untuk mematikan sebuah mesin atau jaringan internet, sehingga tidak bisa diakses oleh user. Serangan DoS sendiri biasanya tidak berujung ke pencurian atau kehilangan informasi atau asset lainnya, tetapi bisa menyebabkan korban kehilangan banyak waktu dan uang untuk karena gangguan di layanan. 
 
+Ada beberapa tipe serangan DoS, diantaranya :
 
+### regex DoS (ReDoS) 
+Regular-expression-based DoS (regex DoS [ReDoS]) adalah salah satu bentuk DoS yang paling umum hari ini. Regex sendiri biasanya digunakan oleh aplikasi web untuk menvalidasi form field dan memastikan user memberi input seperti yang diinginkan oleh server. Regex sendiri biasanya melakukan parsing dengan cukup cepat. Sehingga jarang fungsi Regex yang memperlambat kinerja website. 
 
+Tetapi Regex sendiri bisa dibuat agar berjalan dengan lambat. Regex seperti ini biasanya disebut dengan *malicious regex*. Salah satu contoh dari regex ini adalah `/^((ab)*)+$/`. Regex tersebut melakukan beberapa hal yaitu :
+- Di permulaan baris, mencari `ab`
+- `ab` bisa ditemukan dengan kombinasi antara 0 hingga tidak terbatas
+- `+` berarti mencari semua kemungkinan kombinasi yang mungkin untuk `ab`
+- `$` berarti proses matching dilakukan sampai akhir baris
+  
+Jika kita memasukkan string `ababababababab` maka regex akan memproses dengan cepat, tapi ketika ditambah eksta `a` dibelakangnya tiba-tiba regex berjalan lambat. Hal ini karena regex harus valid sampai akhir, maka sistem akan melakukan backtrak dan mencari kombinasi yang cocok :
 
+- (abababababababa) tidak valid
+- (ababababababa)(ba) tidak valid
+- (abababababa)(baba) tidak valid
+- banyak iterasi selanjutnya : (ab)(ab)(ab)(ab)(ab)(ab)(ab)(a) tidak valid
 
+Serangan ini sendiri cukup sering dibandingkan apa yang kita pikirkan dan biasanya terjadi ketika user diperbolehkan memasukkan Regex mereka sendiri ke website.
+
+### Logical DoS
+
+Dengan Logical DoS, maka resources dari server dihabiskan oleh user yang tidak sah sehingga user yang sah mengalamu pengurangan performa maupun service yang hilang.
+
+![logical-dos](img/logical-dos.png)
+
+Logical DoS mungkin dilakukan ketika ada service yang cukup menguras resource dilakukan di website, seperti :
+- Operasi yang berjalan sinkronous
+- Write di database
+- SQL Joins
+- File Backups
+- Operasi logical yang melakukan looping
+
+Skala dari operasi di aplikasi mungkin bergantung di bagaimana user menggunakan aplikasi tersebut. Seorang power user bisa saja melakukan operasi yang banyak menghabiskan resources, sedangkan new user tidak.
+
+![logical-dos-2](img/logical-dos-2.png)
+
+Dari data ini kita bisa membuat profile yang memakan resource server via GET /metadata/:userid dan menuliskan script yang mengupload gambar berkali-kali sehingga memengaruhi performa server.
+
+### Distribued DoS (DDoS)
+
+Distribued DoS (DDoS) dilakukan dengan banyak user tidak sah yang melakukan sangat banyak request. Teknik ini melibatkan lebih dari satu penyerang, yang bisa merupakan hacker lain ataupun network bots (botnet). 
+
+![ddos](img/ddos.png)
+
+Request yang dilakukan pun bisa langsung menuju IP address dari server tanpa menyebutkan API endpoint secara spesifik.
 
 ## Sumber
 
 - https://www.nginx.com/resources/library/web-application-security/?fbclid=IwAR0MwQPka0mcXgxJsj_VtoumuwJpD5ojC9SbLxpdLN2qDzFSSvV2nt7YBto#download
 - https://mti.binus.ac.id/2018/07/11/cross-site-request-forgery/
 - https://owasp.org/www-community/attacks/SQL_Injection
+- https://www.paloaltonetworks.com/cyberpedia/what-is-a-denial-of-service-attack-dos
