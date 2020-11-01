@@ -39,6 +39,9 @@ Flag bisa didapatkan se-mudah mencari string biasa ataupun harus mendapatkan sua
 Steganografi adalah sebuah seni penyembunyian data dari mata telanjang. Pesan yang ingin disampaikan tidak dapat dilihat secara sekilas. Dibutuhkan ketelitian, pemeriksaan, dan sedikit pengubahan dari cara kita melihat media tersebut untuk bisa mendapatkan pesan yang sesungguhnya.
 
 Challenge-challenge steganografi biasanya berhubungan dengan media (gambar, audio, dan sejenisnya) sehingga dibutuhkan tools yang dapat membaca maupun mengolah jenis-jenis file tersebut
+
+![Contoh steganografi](contoh/stegano.png)
+
 ##### Tools
 + Audacity (audio)
 + Gimp/Photoshop dan sejenisnya
