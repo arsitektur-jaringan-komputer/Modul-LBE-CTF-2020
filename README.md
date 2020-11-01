@@ -15,6 +15,8 @@ Dalam forensik, informasi-informasi tersebut dapat memuat clue dari tujuan akhir
 
 Selain menggunakan exiftool, tipe dari sebuah file juga dapat dilihat dari **magic byte** yang dimilikinya. Magic byte sendiri adalah beberapa byte pada sebuah file yang menunjukkan tipe dari sebuah file. Magic byte ini biasanya berada di awal file dan memiliki panjang 2-4 bytes.
 
+![Contoh metadata](images/exifdata.JPG)
+
 ##### Tools
 + exiftools (`apt-get install exiftool`)
 + http://exif.regex.info/exif.cgi
@@ -27,6 +29,9 @@ Selain menggunakan exiftool, tipe dari sebuah file juga dapat dilihat dari **mag
 Seperti namanya, pada tipe soal ini biasanya kalian akan diberikan file **.pcapng**. File tersebut merupakan traffic dari sebuah network yang berhasil ditangkap. Kalian akan diminta untuk mencari flag-nya di sana.
 
 Flag bisa didapatkan se-mudah mencari string biasa ataupun harus mendapatkan suatu objek terlebih dahulu. Dimana flag-nya bisa didapatkan dari objek tersebut.
+
+![Tampilan wireshark](images/pcapng.JPG)
+
 ##### Tools
 + Wireshark
 
@@ -37,6 +42,10 @@ Challenge-challenge steganografi biasanya berhubungan dengan media (gambar, audi
 ##### Tools
 + Audacity (audio)
 + Gimp/Photoshop dan sejenisnya
+
+### Tools berguna lainnya
++ binwalk (`apt-get install binwalk`)
++ foremost (`apt-get install foremost`)
 
 ### Referensi
 + https://ctf101.org/forensics/overview/
