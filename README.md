@@ -4,11 +4,11 @@ Forensik dalam dunia digital adalah seni untuk memulihkan jejak-jejak digital ya
 Salah satu hal penting dalam pengerjaan challenge forensik adalah penggunaan **tools** yang tepat. Selain itu adalah pengalaman (lol).
 
 Beberapa hal dasar yang perlu dikenali dalam forensik CTF adalah:
-+ [Format File dan Data EXIF / metadata](#format-file-dan-data-exif-metadata)
++ [Format File dan Data EXIF / metadata](#format-file-dan-data-exif)
 + [Captured network traffic](#captured-network-traffic)
 + [Steganografi](#steganografi)
 
-### Format File dan Data EXIF / metadata
+### Format File dan Data EXIF
 Exchangeable Image File Format atau biasa disebut Exif adalah sebuah standar untuk data-data tambahan yang berada pada sebuah file atau foto. Data-data ini bisa berupa banyak hal, seperti: tipe dari sebuah file, kapan dan dimana sebuah foto diambil, kecepatan shutter kamera yang digunakan, apakah file tersebut pernah diubah, dan informasi-informasi lainnya.
 
 Dalam forensik, informasi-informasi tersebut dapat memuat clue dari tujuan akhir kita (di sini tentu untuk mendapatkan flag).
@@ -48,5 +48,6 @@ Challenge-challenge steganografi biasanya berhubungan dengan media (gambar, audi
 + foremost (`apt-get install foremost`)
 
 ### Referensi
-+ https://ctf101.org/forensics/overview/
-+ https://trailofbits.github.io/ctf/forensics/
++ [CTF 101](https://ctf101.org/forensics/overview/)
++ [Trail of bits](https://trailofbits.github.io/ctf/forensics/)
++ [Awesome CTF for awesome tools](https://github.com/apsdehal/awesome-ctf/blob/master/README.md)
