@@ -90,3 +90,8 @@ Transposition cipher yang lebih kompleks.
 ![](https://github.com/arsitektur-jaringan-komputer/Modul-LBE-CTF-2020/blob/cryptography/img/row%20transposition.PNG)
 
 Ciphertext : EIEPWRCRAYWDVNBEOUNZASRLX
+
+## 
+https://www.net-force.nl/challenge/level301/
+https://www.net-force.nl/challenge/level305/
+https://www.net-force.nl/challenge/level306/
