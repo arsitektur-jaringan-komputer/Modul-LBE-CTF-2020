@@ -43,12 +43,21 @@ Challenge-challenge steganografi biasanya berhubungan dengan media (gambar, audi
 ![Contoh steganografi](contoh/stegano.png)
 
 ##### Tools
-+ Audacity (audio)
++ [Audacity](https://www.audacityteam.org/download/) (audio)
 + Gimp/Photoshop dan sejenisnya
 
 ### Tools berguna lainnya
 + binwalk (`apt-get install binwalk`)
 + foremost (`apt-get install foremost`)
+
+### Coba-coba time
+1. Dapatkan flag dari [file ini](contoh/potato_lucu.pdf)!
+2. Sebutkan nama kota [foto ini](contoh/kota_apa_hayo.jpg) berasal!
+3. Hayo keliatan nggak flag-nya [di sini](contoh/stegano.png)?
+4. Yok dicoba [ke sini](contoh/sound.wav) kayak tadi yang dicontohin!
+5. Yang jeli ya liat [ininya](contoh/video.avi)!
+6. Bentuk asli [.docx](contoh/secret_doc.docx) itu sebenernya apasih?
+7. Clue-nya adalah "[abu-abu tua](contoh/abu-abuGelap.pcapng)" :)
 
 ### Referensi
 + [CTF 101](https://ctf101.org/forensics/overview/)
