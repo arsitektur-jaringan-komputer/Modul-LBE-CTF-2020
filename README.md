@@ -355,3 +355,4 @@ Kami mengirim 108 'A untuk menimpa 100 byte yang dialokasikan untuk nama, 4 byte
 
 ## Sumber
 - https://ctf101.org/binary-exploitation/overview/
+- https://www.youtube.com/playlist?list=PLhixgUqwRTjxglIswKp9mpkfPNfHkzyeN
